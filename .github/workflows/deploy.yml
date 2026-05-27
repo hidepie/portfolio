@@ -19,12 +19,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
-      - run: npm ci
-      - run: npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync images (JP filename → EN filename)
+        run: npm run sync-images
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify .nojekyll exists in output
+        run: |
+          if [ ! -f out/.nojekyll ]; then
+            echo "ERROR: out/.nojekyll が見つかりません。Jekyll が _next/ を無視する可能性があります。"
+            exit 1
+          fi
+          echo "OK: out/.nojekyll を確認しました"
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
