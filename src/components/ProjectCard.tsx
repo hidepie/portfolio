@@ -47,7 +47,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
         }}
       >
         <Image
-          src={project.image}
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${project.image}`}
           alt={project.title}
           fill
           className="object-cover object-top"
