@@ -88,31 +88,13 @@ export default function Hero() {
           ゲームからプロダクティビティツールまで構築しています。
         </motion.p>
 
-        {/* CTA Button */}
+        {/* CTA Button — CSS クラスでホバーを管理（JS ハンドラ不要・タッチデバイス対応） */}
         <motion.a
           href="#works"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.375rem",
-            padding: "0.75rem 1.75rem",
-            borderRadius: "9999px",
-            background: "#5865f2",
-            color: "#ffffff",
-            fontSize: "0.9375rem",
-            fontWeight: 600,
-            textDecoration: "none",
-            transition: "background 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.background = "#4752c4";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.background = "#5865f2";
-          }}
+          className="cta-btn"
         >
           制作実績を見る ↓
         </motion.a>

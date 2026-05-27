@@ -6,6 +6,12 @@ export interface Project {
   id: string;
   title: string;
   description: string;
+  /**
+   * root-relative かつベースパス非付与の画像パス。
+   * 例: "/images/foo.jpg"（"/portfolio/images/foo.jpg" や CDN URL は不可）
+   * ProjectCard 内で NEXT_PUBLIC_BASE_PATH を先頭に付与するため、
+   * basePath を含めたパスや絶対 URL を渡すと二重プレフィックスになる。
+   */
   image: string;
   tags: string[];
 }
