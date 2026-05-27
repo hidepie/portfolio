@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio — Built with AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Colors */
+    --bg:           #ffffff;
+    --surface:      #ffffff;
+    --bg-subtle:    #f9fafb;
+    --border:       #e5e7eb;
+    --border-focus: #d1d5db;
+
+    --text-primary:   #111827;
+    --text-secondary: #374151;
+    --text-muted:     #6b7280;
+    --text-subtle:    #9ca3af;
+
+    --accent:       #5865f2;
+    --accent-hover: #4752c4;
+    --accent-text:  #ffffff;
+
+    /* Spacing */
+    --space-xs:  0.5rem;
+    --space-sm:  0.75rem;
+    --space-md:  1rem;
+    --space-lg:  1.5rem;
+    --space-xl:  2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* Typography */
+    --font-sans: 'Inter', 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+    --radius-sm:   0.5rem;
+    --radius-md:   0.75rem;
+    --radius-pill: 9999px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  header {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-xl);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  .logo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .logo-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.3rem 0.875rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--bg-subtle);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xl);
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-size: clamp(1.875rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+  }
+  .hero-title .accent { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: var(--space-2xl);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.75rem 1.75rem;
+    background: var(--accent);
+    color: var(--accent-text);
+    border-radius: var(--radius-pill);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  .hero-cta:hover { background: var(--accent-hover); }
+  .hero-cta svg { opacity: 0.8; }
+
+  /* ── SECTION ── */
+  section { max-width: 1024px; margin: 0 auto; padding: var(--space-3xl) var(--space-xl); }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+  }
+  .section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: var(--space-xs);
+  }
+  .section-desc {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2xl);
+  }
+  .section-header { margin-bottom: var(--space-2xl); text-align: center; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 0;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    cursor: default;
+  }
+  .card:hover {
+    border-color: var(--border-focus);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  }
+
+  .card-img-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .card:hover .card-img { transform: scale(1.02); }
+
+  .card-body { padding: var(--space-lg); }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+  .card-desc {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+  .tag {
+    padding: 0.2rem 0.625rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--bg-subtle);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg-subtle); border-radius: var(--radius-md); }
+  .about-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl);
+    text-align: center;
+  }
+
+  .about-title {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin-bottom: var(--space-md);
+  }
+  .about-text {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: var(--space-xl);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+  .skill-tag {
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: var(--space-xl);
+    text-align: center;
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .footer-text {
+    font-size: 0.8125rem;
+    color: var(--text-subtle);
+  }
+  .footer-text a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .footer-text a:hover { text-decoration: underline; }
+
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    header { padding: 0 var(--space-md); }
+    #hero  { padding: var(--space-2xl) var(--space-md); }
+    section { padding: var(--space-2xl) var(--space-md); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <a href="#" class="logo">
+    <span class="logo-dot"></span>
+    <span class="logo-text">Portfolio</span>
+  </a>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div id="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    BUILT WITH AI
+  </div>
+
+  <h1 class="hero-title">
+    AI で作る、<br>
+    <span class="accent">動くもの</span>を。
+  </h1>
+
+  <p class="hero-sub">
+    Claude Code を使った AI 駆動開発で<br>
+    ゲームからプロダクティビティツールまで構築しました
+  </p>
+
+  <a href="#works" class="hero-cta">
+    制作実績を見る
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </a>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ WORKS ═══ -->
+<section id="works">
+  <div class="section-header">
+    <p class="section-label">Works</p>
+    <h2 class="section-title">制作実績</h2>
+    <p class="section-desc">Claude Code で構築したアプリケーション</p>
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- ぷよぷよ -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="image/ぷよぷよ②.jpg" alt="ぷよぷよ" />
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">ぷよぷよ</h3>
+        <p class="card-desc">
+          BFS 連鎖判定・スコアリング・ポーズ機能を完全実装。
+          ネオン発光エフェクト付きのブラウザゲーム。
+        </p>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">React 19</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Tailwind v4</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- テトリス -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="image/テトリス.png" alt="テトリス" />
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">テトリス</h3>
+        <p class="card-desc">
+          ホールド・ゴーストピース・レベルアップ・ハードドロップを実装。
+          サイバーパンクテーマのブラウザゲーム。
+        </p>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">React 19</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Tailwind v4</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ポモドーロ -->
+    <div class="card">
+      <div class="card-img-wrap">
+        <img class="card-img" src="image/ポモドーロアプリ.png" alt="ポモドーロアプリ"
+             style="object-fit: contain; background: #f9fafb;" />
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">ポモドーロアプリ</h3>
+        <p class="card-desc">
+          作業セッション管理・短い休憩・設定画面を備えた
+          クリーンなモバイル UI のタイマーアプリ。
+        </p>
+        <div class="tags">
+          <span class="tag">React Native</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Mobile UI</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" style="background: var(--bg-subtle); border-radius: 0;">
+  <div class="about-inner">
+    <p class="section-label" style="margin-bottom: var(--space-sm);">About</p>
+    <h2 class="about-title">AI と共に、<br>動くものを作る。</h2>
+    <p class="about-text">
+      Claude Code を活用した AI 駆動開発で、ゲームからプロダクティビティツールまで
+      幅広いアプリケーションを構築しています。<br>
+      アイデアを素早く形にし、実際に動く成果物として仕上げることにこだわっています。
+    </p>
+    <div class="skill-tags">
+      <span class="skill-tag">Next.js</span>
+      <span class="skill-tag">React</span>
+      <span class="skill-tag">TypeScript</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Tailwind CSS</span>
+      <span class="skill-tag">Claude Code</span>
+      <span class="skill-tag">AI-Driven Dev</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-text">
+      Built with <a href="#">Claude Code</a> × <a href="#">Next.js</a>
+    </p>
+    <p class="footer-text" style="color: var(--border);">
+      © 2026 Portfolio. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

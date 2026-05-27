@@ -1,0 +1,258 @@
+# ============================================================
+# Design Prompt YAML — Abstracted from visual analysis
+# Source aesthetic: Ultra-minimal Japanese SaaS / Clean Login UI
+# Usage: Paste into any design/coding prompt to apply this style
+# ============================================================
+
+design_system:
+
+  # ----------------------------------------------------------
+  # MOOD & ATMOSPHERE
+  # ----------------------------------------------------------
+  mood:
+    keywords:
+      - ultra-minimal
+      - clean
+      - breathable
+      - professional
+      - approachable
+      - calm
+      - focused
+    tone: |
+      静けさと機能性を最優先。装飾を排除し、コンテンツだけが
+      存在するような余白と空間の使い方。日本的なミニマリズム。
+      ユーザーに「迷わせない」ことを設計原則とする。
+    anti_patterns:
+      - グラデーション背景は使わない
+      - 複数のアクセントカラーは持たない
+      - 影は重くしない（使うなら薄く小さく）
+      - アニメーションは控えめに（動きで注意を奪わない）
+      - 装飾的な図形・イラストは置かない
+
+  # ----------------------------------------------------------
+  # COLOR PALETTE
+  # ----------------------------------------------------------
+  colors:
+    # ベース（背景・サーフェス）
+    background:
+      page:    "#ffffff"   # ページ全体の背景（純白）
+      surface: "#ffffff"   # カード・パネルの背景（同色）
+      subtle:  "#f9fafb"   # ごく薄いオフホワイト（区切りに使う程度）
+
+    # ボーダー・区切り線
+    border:
+      default: "#e5e7eb"   # カードの枠線・セパレーター（薄いグレー）
+      focus:   "#d1d5db"   # フォーカス時の枠線
+
+    # テキスト
+    text:
+      primary:   "#111827"  # 見出し・重要テキスト（ほぼ黒）
+      secondary: "#374151"  # 本文テキスト（ダークグレー）
+      muted:     "#6b7280"  # サブテキスト・説明文
+      subtle:    "#9ca3af"  # 注記・フッターなど最弱テキスト
+
+    # アクセント（1色のみ使用すること）
+    accent:
+      primary:      "#5865f2"  # メインアクション（ボタン・リンク）
+      primary_hover: "#4752c4" # ホバー時（10%暗く）
+      primary_text:  "#ffffff" # アクセント上のテキスト
+
+    # ステータス（必要な場合のみ）
+    semantic:
+      success: "#16a34a"
+      warning: "#d97706"
+      error:   "#dc2626"
+
+  # ----------------------------------------------------------
+  # TYPOGRAPHY
+  # ----------------------------------------------------------
+  typography:
+    font_family:
+      sans: "'Inter', 'Noto Sans JP', system-ui, -apple-system, sans-serif"
+      mono: "'JetBrains Mono', 'Fira Code', monospace"
+
+    scale:
+      xs:   "0.75rem"   # 12px — 注記・ラベル
+      sm:   "0.875rem"  # 14px — サブテキスト・補足
+      base: "1rem"      # 16px — 基本本文
+      lg:   "1.125rem"  # 18px — 強調本文
+      xl:   "1.25rem"   # 20px — 小見出し
+      "2xl": "1.5rem"   # 24px — 中見出し
+      "3xl": "1.875rem" # 30px — 大見出し
+
+    weight:
+      normal:    400
+      medium:    500
+      semibold:  600
+      bold:      700
+
+    line_height:
+      tight:   1.25   # 見出し用
+      normal:  1.5    # 本文用
+      relaxed: 1.75   # 読みやすい長文用
+
+    rules:
+      - "見出しは font-weight: 700、color: text.primary を基本とする"
+      - "サブテキストは color: text.muted で控えめに"
+      - "日本語フォントは Noto Sans JP を明示的に指定する"
+
+  # ----------------------------------------------------------
+  # SPACING & LAYOUT
+  # ----------------------------------------------------------
+  spacing:
+    philosophy: |
+      「余白こそデザイン」— 要素間の距離は大きめに取り、
+      ページ全体に空気感を持たせる。詰め込まない。
+    base_unit: "4px"  # 4px グリッドシステム
+    scale:
+      xs:   "0.5rem"   # 8px
+      sm:   "0.75rem"  # 12px
+      md:   "1rem"     # 16px
+      lg:   "1.5rem"   # 24px
+      xl:   "2rem"     # 32px
+      "2xl": "3rem"    # 48px
+      "3xl": "4rem"    # 64px
+    page_padding:
+      mobile:  "1rem"    # 16px
+      desktop: "2rem"    # 32px
+    max_width:
+      content: "640px"   # ログイン・フォーム系
+      wide:    "1024px"  # ダッシュボード・リスト系
+
+  # ----------------------------------------------------------
+  # COMPONENTS
+  # ----------------------------------------------------------
+  components:
+
+    card:
+      background:    "colors.background.surface"
+      border:        "1px solid colors.border.default"
+      border_radius: "0.75rem"   # 12px — 大きめの角丸
+      padding:       "2rem"      # 32px — 内側に余裕を持たせる
+      shadow:        "none"      # 影は使わない（ボーダーで区切る）
+      shadow_hover:  "0 1px 4px rgba(0,0,0,0.06)"  # ホバー時だけ微かに
+
+    button:
+      primary:
+        background:    "colors.accent.primary"
+        text:          "colors.accent.primary_text"
+        border_radius: "9999px"    # 完全な pill 形状
+        padding:       "0.75rem 1.5rem"
+        font_weight:   "semibold"
+        font_size:     "sm"
+        width:         "100%"      # フォーム内では全幅
+        transition:    "background 0.15s ease"
+      secondary:
+        background:    "transparent"
+        text:          "colors.text.secondary"
+        border:        "1px solid colors.border.default"
+        border_radius: "9999px"
+
+    avatar:
+      shape:  "circle"        # 必ず円形
+      sizes:
+        sm:  "32px"
+        md:  "48px"
+        lg:  "64px"
+      border: "2px solid colors.border.default"
+
+    input:
+      background:    "colors.background.surface"
+      border:        "1px solid colors.border.default"
+      border_radius: "0.5rem"
+      padding:       "0.625rem 0.875rem"
+      font_size:     "base"
+      focus_ring:    "0 0 0 2px colors.accent.primary at 30% opacity"
+
+    divider:
+      color:     "colors.border.default"
+      thickness: "1px"
+
+    badge:
+      border_radius: "9999px"
+      padding:       "0.25rem 0.75rem"
+      font_size:     "xs"
+
+  # ----------------------------------------------------------
+  # EFFECTS & INTERACTION
+  # ----------------------------------------------------------
+  effects:
+    border_radius_philosophy: |
+      角丸は「大きめ」に統一する（4px以下の sharp は使わない）。
+      カードは 12px、ボタンは pill（9999px）が基本。
+    shadow_philosophy: |
+      影は最小限。カードは基本 shadow なし（border で区切る）。
+      ホバー時にのみ ultra-subtle な影を付与可。
+    animation:
+      duration_fast:   "100ms"
+      duration_normal: "150ms"
+      duration_slow:   "300ms"
+      easing:          "ease"
+      rules:
+        - "トランジションは color・background・opacity のみに限定"
+        - "transform で要素を動かす場合は translateY(±2〜4px) まで"
+        - "無限ループアニメーションは使わない"
+    hover:
+      button:  "background を 10% 暗く"
+      card:    "border-color を一段階濃く + shadow を微かに"
+      link:    "underline を表示 or opacity を 0.8 に"
+
+  # ----------------------------------------------------------
+  # ICONOGRAPHY
+  # ----------------------------------------------------------
+  icons:
+    library:   "Lucide または Heroicons（アウトラインスタイル）"
+    size:      "16px (inline), 20px (button内), 24px (standalone)"
+    color:     "text.muted を基本とし、アクションアイコンは text.primary"
+    stroke:    "1.5px"
+
+  # ----------------------------------------------------------
+  # LAYOUT PATTERNS
+  # ----------------------------------------------------------
+  layout:
+    philosophy: |
+      コンテンツを中央に寄せ、十分な余白を確保する。
+      1カラムで完結するシンプルな垂直フローを優先。
+    auth_pages:
+      pattern: "page full-height centering + single card"
+      card_width: "max-width: 400px, width: 100%"
+      vertical_alignment: "center (flex)"
+    header:
+      height:    "56px"
+      padding:   "0 1.5rem"
+      border:    "bottom 1px solid colors.border.default"
+      logo_size: "small (avatar 28px + text sm)"
+
+  # ----------------------------------------------------------
+  # DO / DON'T SUMMARY
+  # ----------------------------------------------------------
+  do:
+    - "白背景・大きな余白で「空気感」を作る"
+    - "アクセントカラーは1色だけ、CTA ボタンにのみ使う"
+    - "テキストの階層は color（明度差）で表現する"
+    - "カードはボーダーで区切る（影に頼らない）"
+    - "ボタンは pill 形状（border-radius: 9999px）"
+    - "フォント: Inter + Noto Sans JP の組み合わせ"
+    - "日本語テキストは line-height: 1.75 以上で読みやすく"
+
+  dont:
+    - "グラデーション・背景テクスチャを使わない"
+    - "複数のアクセントカラーを混在させない"
+    - "box-shadow を重く使わない"
+    - "アイコンを装飾目的で置かない（機能的なものだけ）"
+    - "文字サイズの差をつけすぎない（最大2段階の差）"
+    - "ダークテーマ・ネオン系は使わない"
+
+  # ----------------------------------------------------------
+  # PROMPT SNIPPET — コピペ用
+  # ----------------------------------------------------------
+  prompt_snippet: |
+    Design style: Ultra-minimal Japanese SaaS aesthetic.
+    Pure white background (#ffffff) with generous whitespace.
+    Single accent color (#5865f2) used only for primary CTAs.
+    Text hierarchy through grayscale only (primary: #111827, muted: #6b7280).
+    Cards with subtle border (#e5e7eb), no shadow, border-radius 12px.
+    Pill-shaped buttons (border-radius: 9999px), full-width in forms.
+    Typography: Inter + Noto Sans JP, bold headings, relaxed line-height for Japanese.
+    No gradients, no decorative illustrations, no infinite animations.
+    Calm, focused, breathable — let content speak for itself.
